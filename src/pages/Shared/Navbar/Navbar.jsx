@@ -5,10 +5,19 @@ const Navbar = () => {
     const navOptions = (
         <>
             <li>
-                <Link to={'/menu'}>Our Menu</Link>
+                <Link className="btn btn-ghost text-black lg:text-white hover:bg-inherit" to={"/"}>
+                    Home
+                </Link>
             </li>
             <li>
-                <Link to={'/'}>Item 3</Link>
+                <Link className="btn btn-ghost text-black lg:text-white hover:bg-inherit" to={"/menu"}>
+                    Our Menu
+                </Link>
+            </li>
+            <li>
+                <Link className="btn btn-ghost text-black lg:text-white hover:bg-inherit" to={"/order/salad"}>
+                    Order Food
+                </Link>
             </li>
         </>
     )
@@ -38,7 +47,7 @@ const Navbar = () => {
                     <a className="btn btn-ghost text-xl">Bistro Boss</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+                    <ul className=" menu-horizontal px-1">{navOptions}</ul>
                 </div>
                 <div className="navbar-end">
                     <a className="btn">Button</a>
