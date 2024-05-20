@@ -1,7 +1,58 @@
 import React from "react"
+import useAuth from "../../../hooks/useAuth"
+import Swal from "sweetalert2"
+import { useLocation, useNavigate } from "react-router-dom"
+import useAxiosSecure from "../../../hooks/useAxiosSecure"
+import useCart from "../../../hooks/useCart"
 
 const FoodCard = ({ item }) => {
-    const { name, image, price, recipe } = item
+    const { name, image, price, recipe, _id } = item
+    const { user } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const axiosSecure = useAxiosSecure()
+    const [, refetch] = useCart()
+
+    const handleAddToCard = () => {
+        if (user && user?.email) {
+            // todo: send cart item to the database
+            const cartItem = {
+                menuId: _id,
+                email: user.email,
+                name,
+                image,
+                price,
+            }
+            axiosSecure.post("/carts", cartItem).then((res) => {
+                console.log(res)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${name} added to your cart.`,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                    refetch()
+                }
+            })
+        } else {
+            Swal.fire({
+                title: "You are not logged in!",
+                text: "Please login to add to the cart!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, login!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login", { state: { from: location } })
+                }
+            })
+        }
+    }
+
     return (
         <div className="card bg-base-100 shadow-xl">
             <figure>
@@ -12,7 +63,10 @@ const FoodCard = ({ item }) => {
                 <h2 className="card-title">{name}</h2>
                 <p>{recipe}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-outline border-0 border-b-4 border-[#BB8506] text-[#BB8506] uppercase">
+                    <button
+                        onClick={handleAddToCard}
+                        className="btn btn-outline border-0 border-b-4 border-[#BB8506] text-[#BB8506] uppercase"
+                    >
                         Add to Cart
                     </button>
                 </div>
