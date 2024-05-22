@@ -1,8 +1,10 @@
 import {
+    GoogleAuthProvider,
     createUserWithEmailAndPassword,
     getAuth,
     onAuthStateChanged,
     signInWithEmailAndPassword,
+    signInWithPopup,
     signOut,
     updateProfile,
 } from "firebase/auth"
@@ -16,6 +18,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const [load, setLoad] = useState(true)
+    const googleProvider = new GoogleAuthProvider()
 
     const createUser = (email, password) => {
         setLoading(true)
@@ -25,6 +28,11 @@ const AuthProvider = ({ children }) => {
     const signIn = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    const googleSignIn = () => {
+        setLoading(true)
+        return signInWithPopup(auth, googleProvider)
     }
 
     const logOut = () => {
@@ -51,7 +59,7 @@ const AuthProvider = ({ children }) => {
     }, [])
     if (load) return <div className="flex items-center justify-center h-screen text-4xl">Loading...</div>
 
-    const authInfo = { user, loading, createUser, signIn, logOut, updateUserProfile }
+    const authInfo = { user, loading, createUser, signIn, logOut, updateUserProfile, googleSignIn }
     return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
 }
 

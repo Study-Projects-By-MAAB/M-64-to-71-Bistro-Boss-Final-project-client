@@ -3,6 +3,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-s
 import useAuth from "../../hooks/useAuth"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
+import SocialLogin from "../../components/SocialLogin/SocialLogin"
 
 const Login = () => {
     const location = useLocation()
@@ -110,10 +111,11 @@ const Login = () => {
                             <input disabled={!disabled} type="submit" value={"Login"} /* change korte hobe */ className="btn btn-primary" />
                         </div>
                     </form>
-                    <p>
+                    <p className="px-6">
                         <small>New Here?</small>
                         <Link to={"/signup"}> Create an account</Link>
                     </p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
