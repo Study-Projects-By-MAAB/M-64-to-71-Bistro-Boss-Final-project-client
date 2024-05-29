@@ -61,7 +61,7 @@ const CheckoutForm = () => {
         } else {
             console.log("payment intent", paymentIntent)
             if (paymentIntent.status === "succeeded") {
-                console.log("transactionId", paymentIntent.id)
+                // console.log("transactionId", paymentIntent.id)
                 setTransactionId(paymentIntent.id)
                 // now save the payment in the database.
                 const payment = {

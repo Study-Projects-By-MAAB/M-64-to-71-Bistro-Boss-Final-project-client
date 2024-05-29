@@ -58,14 +58,16 @@ const AuthProvider = ({ children }) => {
                     // console.log(res.data.token)
                     if (res.data.token) {
                         localStorage.setItem("access-token", res.data.token)
+                        setLoading(false)
+                        setLoad(false)
                     }
                 })
             } else {
                 // remove token(if token stored in the client side like: local storage, caching, in memory)
                 localStorage.removeItem("access-token")
+                setLoading(false)
+                setLoad(false)
             }
-            setLoading(false)
-            setLoad(false)
         })
 
         return () => {
@@ -73,11 +75,11 @@ const AuthProvider = ({ children }) => {
         }
     }, [axiosPublic])
 
-    useEffect(() => {
-        if (user) {
-            setLoading(false)
-        }
-    }, [user])
+    // useEffect(() => {
+    //     if (user) {
+    //         setLoading(false)
+    //     }
+    // }, [user])
 
     if (load) return <div className="flex items-center justify-center h-screen text-4xl">Loading...</div>
 
