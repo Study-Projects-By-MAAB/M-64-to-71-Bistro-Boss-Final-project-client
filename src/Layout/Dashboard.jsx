@@ -1,5 +1,16 @@
 import React from "react"
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa"
+import {
+    FaAd,
+    FaBook,
+    FaCalendar,
+    FaEnvelope,
+    FaHome,
+    FaList,
+    FaSearch,
+    FaShoppingCart,
+    FaUsers,
+    FaUtensils,
+} from "react-icons/fa"
 import { NavLink, Outlet } from "react-router-dom"
 import useCart from "../hooks/useCart"
 import { useAdmin } from "../hooks/useAdmin"
@@ -86,6 +97,12 @@ const Dashboard = () => {
                         <NavLink to="/">
                             <FaHome></FaHome>
                             Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/order/salad">
+                            <FaSearch></FaSearch>
+                            Menu
                         </NavLink>
                     </li>
                     <li>
