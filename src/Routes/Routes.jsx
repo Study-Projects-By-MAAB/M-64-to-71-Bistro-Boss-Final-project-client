@@ -18,6 +18,9 @@ import Payment from "../pages/Dashboard/Payment/Payment"
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory"
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome"
 import UserHome from "../pages/Dashboard/UserHome/UserHome"
+import Fail from "../pages/Dashboard/Payment/Fail"
+import Success from "../pages/Dashboard/Payment/Success"
+import Cancel from "../pages/Dashboard/Payment/Cancel"
 
 export const router = createBrowserRouter([
     {
@@ -124,5 +127,17 @@ export const router = createBrowserRouter([
                 ),
             },
         ],
+    },
+    {
+        path: "/fail",
+        element: <Fail></Fail>,
+    },
+    {
+        path: "/success",
+        element: <Success></Success>,
+    },
+    {
+        path: "/cancel",
+        element: <Cancel></Cancel>,
     },
 ])
